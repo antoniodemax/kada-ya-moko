@@ -51,7 +51,7 @@ test("Machines page: cloud section lists the org's machines beside the local reg
 
   await expect(page.getByTestId("machine-hetzner-box")).toBeVisible();
   const section = page.getByTestId("cloud-machines-section");
-  await expect(section).toContainText("Kada ya mko Cloud · DeepLearning AI");
+  await expect(section).toContainText("Kada ya moko Cloud · DeepLearning AI");
   await expect(section.getByTestId("machine-cloud-vm")).toBeVisible();
 });
 
@@ -138,7 +138,7 @@ test("runs-on menu groups cloud machines under their own header", async ({
   await page.getByRole("button", { name: "New session" }).click();
   const chip = page.getByTestId("runson-chip");
   await chip.click();
-  await expect(page.getByText("Kada ya mko Cloud", { exact: true })).toBeVisible();
+  await expect(page.getByText("Kada ya moko Cloud", { exact: true })).toBeVisible();
   await expect(page.getByText("⌂ cloud-vm")).toBeVisible();
   await expect(page.getByText("⌂ hetzner-box")).toBeVisible();
 });

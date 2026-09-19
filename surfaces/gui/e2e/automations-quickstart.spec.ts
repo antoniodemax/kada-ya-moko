@@ -8,7 +8,7 @@ import { test } from "./fixtures";
 async function openAutomations(page) {
   await page.goto("/");
   await page.getByTestId("nav-automations").click();
-  await expect(page.getByText("Recurring tasks Kada ya mko runs on a schedule.")).toBeVisible();
+  await expect(page.getByText("Recurring tasks Kada ya moko runs on a schedule.")).toBeVisible();
 }
 
 // The fixtures seed one task, so the quickstart isn't on the bare list — surface it via the

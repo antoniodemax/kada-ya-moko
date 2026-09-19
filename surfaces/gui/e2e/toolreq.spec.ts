@@ -22,10 +22,10 @@ test("request_tool surfaces a card naming the tool, the reason and the pinned ve
   // the coworker's quoted reason (mixing them is what made the card confusing, 2026-08-14).
   const facts = card.locator(".toolreq-facts");
   await expect(facts).toContainText("8.30.1");
-  // Plain-language consent: who installs (Kada ya mko), from where, and the self-install
+  // Plain-language consent: who installs (Kada ya moko), from where, and the self-install
   // alternative — no supply-chain jargon on the card (owner feedback 2026-08-15).
   await expect(facts).toContainText(
-    "Kada ya mko installs its own verified copy from github.com/gitleaks — or install it yourself and continue.",
+    "Kada ya moko installs its own verified copy from github.com/gitleaks — or install it yourself and continue.",
   );
   // Declining must read as a normal choice that continues the run, not a failure.
   await expect(card.getByTestId("toolreq-skip")).toHaveText("Continue without it");
