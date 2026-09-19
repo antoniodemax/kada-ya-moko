@@ -191,7 +191,7 @@ describe("SkillsTab", () => {
     });
   });
 
-  it("Add skill menu: three doors; Create with OpenWorker hands off to a conversation", async () => {
+  it("Add skill menu: three doors; Create with Kada ya mko hands off to a conversation", async () => {
     const calls = stubFetch([{ match: "/v1/skills", method: "GET", json: { skills: [] } }]);
     const onCreateSkill = vi.fn();
     render(<SkillsTab onCreateSkill={onCreateSkill} />);
@@ -201,7 +201,7 @@ describe("SkillsTab", () => {
     expect(screen.getByText("Import a file")).toBeTruthy();
     expect(screen.getByText(/you review before it installs/)).toBeTruthy();
     expect(screen.getByText(/asks before adding it to\s+your skills/)).toBeTruthy();
-    fireEvent.click(screen.getByText("Create with OpenWorker"));
+    fireEvent.click(screen.getByText("Create with Kada ya mko"));
     // Straight to the conversation — the composer is where you describe it (§5.2).
     expect(onCreateSkill).toHaveBeenCalledWith("");
     // Settings never drafts: no POST of any kind happened.
@@ -240,7 +240,7 @@ describe("SkillsTab", () => {
     // No permanently-open description box or draft-era UI (§5.2/§9) — adding is menu-only.
     expect(screen.queryByLabelText("Describe the skill")).toBeNull();
     expect(screen.queryByText("Start a conversation")).toBeNull();
-    expect(screen.queryByText("Ask OpenWorker to revise")).toBeNull();
+    expect(screen.queryByText("Ask Kada ya mko to revise")).toBeNull();
     expect(screen.queryByText(/Not a chat/)).toBeNull();
     // The menu closes after picking a door.
     await openWriteForm();
