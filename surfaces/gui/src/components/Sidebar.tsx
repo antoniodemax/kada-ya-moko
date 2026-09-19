@@ -393,7 +393,7 @@ export function Sidebar(props: Props) {
   // Display identity for the account row: the cloud profile only carries the email, so the
   // row shows the capitalized local part ("rohit@…" → "Rohit"); the menu header shows it all.
   // On the hosted dashboard the identity comes from the Auth0 sign-in gate instead — the
-  // gateway account concept ("OpenWorker Cloud" sign-in) does not exist there.
+  // gateway account concept ("Kada ya mko Cloud" sign-in) does not exist there.
   const hostedActor = isCloudMode() ? (cloudMe()?.actor ?? "") : "";
   const accountEmail = hostedActor || (cloud?.signed_in ? cloud.account : "");
   const accountName = accountEmail
@@ -1069,7 +1069,7 @@ export function Sidebar(props: Props) {
             <Icon name="sidebar" size={16} />
           </button>
         )}
-        <div className="brand-wordmark text-body">OpenWorker<span className="beta-tag">beta</span></div>
+        <div className="brand-wordmark text-body">Kada ya mko<span className="beta-tag">beta</span></div>
       </div>
 
       {props.settingsRail ? (

@@ -300,7 +300,7 @@ test("grant handoff: a managed grant explains the refresh gate instead of moving
 
   await page.getByTestId("remote-move-gmail").click();
   await expect(
-    page.getByText(/renews its sign-in through OpenWorker Cloud/),
+    page.getByText(/renews its sign-in through Kada ya mko Cloud/),
   ).toBeVisible();
 });
 

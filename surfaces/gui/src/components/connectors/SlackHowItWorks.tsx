@@ -242,7 +242,7 @@ function OwWin({ children }: { children: React.ReactNode }) {
 function OwRail({ hot, hotSub, glow }: { hot?: string; hotSub?: string; glow?: boolean }) {
   return (
     <div className="hiw-owrail">
-      <div className="hiw-brand">OpenWorker</div>
+      <div className="hiw-brand">Kada ya mko</div>
       <div className="hiw-newbtn">＋ {tr("slack.hiw_new_session")}</div>
       <div className="hiw-ownav">⌕ {tr("slack.hiw_search")}</div>
       <div className="hiw-ownav">◷ {tr("slack.hiw_automations")}</div>
@@ -399,7 +399,7 @@ function SceneThread({ meFirst, meInitial }: { meFirst: string; meInitial: strin
       </SlackWin>
       <OwWin>
         <div className="hiw-owrail">
-          <div className="hiw-brand">OpenWorker</div>
+          <div className="hiw-brand">Kada ya mko</div>
           <div className="hiw-newbtn">＋ {tr("slack.hiw_new_session")}</div>
           <div className="hiw-ownav">⌕ {tr("slack.hiw_search")}</div>
           <div className="hiw-ownav">◷ {tr("slack.hiw_automations")}</div>
