@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd surfaces/gui && npm ci",
+  "buildCommand": "cd surfaces/gui && npm run build",
+  "outputDirectory": "surfaces/gui/dist"
+}
