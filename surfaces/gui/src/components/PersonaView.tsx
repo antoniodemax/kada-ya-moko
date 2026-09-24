@@ -191,7 +191,7 @@ export function PersonaView({
     <main className="flex-1 min-w-0 flex flex-col bg-paper">
       {header}
       <div className="flex-1 overflow-y-auto hairline-scroll">
-        <div className="max-w-3xl mx-auto px-7 py-6 space-y-6">
+        <div className="max-w-3xl mx-auto px-4 py-5 sm:px-7 sm:py-6 space-y-6">
           {/* identity + enable (no coworker glyph — owner 2026-08-21) */}
           <header className="flex items-start gap-3.5">
             <div className="min-w-0">

@@ -342,7 +342,7 @@ export function SettingsView({
       {railSlot ? createPortal(nav, railSlot) : nav}
 
       <div className="flex-1 min-w-0 overflow-y-auto hairline-scroll">
-        <div className="max-w-3xl mx-auto px-7 py-6">
+        <div className="max-w-3xl mx-auto px-4 py-5 sm:px-7 sm:py-6">
           {tab === "appearance" ? (
             <AppearanceSection />
           ) : tab === "account" ? (

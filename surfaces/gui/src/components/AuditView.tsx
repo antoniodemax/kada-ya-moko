@@ -34,7 +34,7 @@ export function AuditView() {
   return (
     <main className="flex-1 min-w-0 flex bg-paper">
       <div className="flex-1 min-w-0 overflow-y-auto hairline-scroll">
-        <div className="max-w-4xl mx-auto px-7 py-6">
+        <div className="max-w-4xl mx-auto px-4 py-5 sm:px-7 sm:py-6">
           <PanelHead
             title={t("audit.title")}
             sub={t("audit.sub")}

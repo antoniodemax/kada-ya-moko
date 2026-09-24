@@ -2036,6 +2036,90 @@ html[data-platform="linux"] ::-webkit-scrollbar-thumb:hover { background-color: 
 .board-changes textarea:focus { border-color: var(--accent); }
 .board-changes-row { display: flex; gap: 12px; align-items: center; }
 
+/* ---------- responsive shell (phones + tablets) -------------------------------
+   The desktop grid gives the nav a fixed 300px column; below 900px the nav becomes
+   an off-canvas drawer driven by the existing navCollapsed state, the right rail
+   floats over the chat instead of squeezing it, and gutters/type tighten for
+   320–430px phones. Nothing above 900px changes. */
+.nav-scrim { display: none; }
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .app .sidebar,
+  .app.nav-collapsed .sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0;
+    width: min(300px, 86vw);
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 0.18s ease;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+  }
+  .app:not(.nav-collapsed) .sidebar { transform: translateX(0); }
+  /* Hover-peek is a pointer affordance; on touch the drawer opens from the topbar
+     cluster's sidebar button and closes via the scrim or that same button. */
+  .app.nav-collapsed.nav-peek .sidebar { transform: translateX(-100%); }
+  .nav-scrim { display: block; position: fixed; inset: 0; z-index: 55; background: var(--scrim); }
+
+  /* Right rail floats over the chat instead of squeezing it to a sliver. */
+  .main.rail-open .main-chat { margin-right: 0; }
+  .main.rail-open .main-topbar { right: 0; }
+  .right-rail {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(360px, 94vw); z-index: 45;
+    box-shadow: -12px 0 32px rgba(0, 0, 0, 0.18);
+  }
+  .right-rail.artifact-mode { width: 100vw; }
+  .main.rail-open:has(.right-rail.artifact-mode) .main-chat { margin-right: 0; }
+  .main.rail-open:has(.right-rail.artifact-mode) .main-topbar { right: 0; }
+
+  .main-topbar { padding: 0 8px 0 10px; gap: 6px; }
+  .main-title { max-width: max(72px, calc(100% - 210px)); }
+  .app.nav-collapsed.tauri-overlay .main-title { max-width: max(72px, calc(100% - 260px)); }
+  /* The fixed reveal button owns the top-left corner on phones; full-page surfaces
+     (Settings/Persona/Audit/Inbox/Automations — direct grid children of .app) start
+     below it instead of under it. */
+  .app.nav-collapsed > main { padding-top: 44px; }
+
+  /* Board overlay: stack list + detail instead of side-by-side. */
+  .board-overlay { padding: 12px; }
+  .board-overlay-body { flex-direction: column; }
+  .board-detail { width: 100%; flex: 1; border-left: 0; border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 640px) {
+  .title-sub { display: none; }
+  .main-title { max-width: max(64px, calc(100% - 170px)); }
+  .main-scroll { padding: 32px 14px 16px; }
+  div.composer-wrap { padding-left: 10px; padding-right: 10px; }
+  .intro { padding: 28px 14px 18px; }
+  .greeting { font-size: 28px; }
+  .intro .greeting { font-size: 23px; }
+  .gate { padding: 20px 18px 16px; }
+  .gate h2 { font-size: 21px; }
+  .sub-pop { width: min(300px, calc(100vw - 28px)); }
+  .dd-menu { max-width: calc(100vw - 20px); }
+  .unauthorized-card { max-width: min(420px, 92vw); }
+  .approval-scope { white-space: normal; }
+  .statusline { flex-wrap: wrap; gap: 6px 12px; }
+}
+
+@media (max-width: 400px) {
+  .main-scroll { padding: 28px 10px 12px; }
+  .greeting { font-size: 24px; }
+  .main-title { max-width: max(56px, calc(100% - 150px)); }
+}
+
+/* Touch: finger-sized hit targets, and reveal affordances that desktop hides
+   behind hover (a tap can never hover). */
+@media (pointer: coarse) {
+  .topbar-icon-btn { width: 38px; height: 38px; }
+  .rail-mini-btn { width: 32px; height: 32px; }
+  .send { width: 40px; height: 40px; }
+  .pill { padding: 8px 10px; }
+  .suggest { padding: 14px 6px; }
+  .task-card-act { opacity: 1; }
+}
+
 /* Journal rail section */
 .journal-list { display: flex; flex-direction: column; gap: 3px; }
 .journal-row { display: flex; align-items: center; gap: 7px; font-size: var(--fs-ui); color: var(--muted); padding: 3px 4px; }

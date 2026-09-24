@@ -407,8 +407,14 @@ export function App() {
   }, []);
   // Left-nav collapse (⌘B): when collapsed the sidebar leaves the grid so content reclaims the
   // width; hovering the left edge peeks it back as a floating overlay. Persisted per-device.
+  // Phones (≤900px, where the nav is an off-canvas drawer) start docked unless the device
+  // already stored a preference — a 300px column would otherwise eat the whole viewport.
   const [navCollapsed, setNavCollapsed] = useState<boolean>(() => {
-    try { return localStorage.getItem(NAV_COLLAPSED_KEY) === "1"; } catch { return false; }
+    try {
+      const stored = localStorage.getItem(NAV_COLLAPSED_KEY);
+      if (stored !== null) return stored === "1";
+    } catch { /* best effort */ }
+    return window.matchMedia("(max-width: 900px)").matches;
   });
   const [navPeek, setNavPeek] = useState(false);
   // While an artifact preview is open we auto-collapse the nav (#3). Remember the pre-preview
@@ -423,6 +429,14 @@ export function App() {
     navBeforePreview.current = null; // a manual toggle takes control from the artifact auto-collapse
     setNavCollapsedPersist(!navCollapsed);
   }, [navCollapsed, setNavCollapsedPersist]);
+  // Crossing into phone width docks the nav so the drawer shell takes over; returning to
+  // desktop leaves whatever the user last chose alone.
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 900px)");
+    const onChange = () => { if (mq.matches) setNavCollapsed(true); };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
   // #3: collapse the nav while a full artifact preview is open, restore it on close (unless the
   // user manually toggled meanwhile). The collapse is transient — it never overwrites the pref.
   // STABLE identity (no deps): depending on navCollapsed changed this callback's identity on
@@ -1857,6 +1871,11 @@ export function App() {
           onMouseEnter={() => setNavPeek(true)}
           aria-hidden="true"
         />
+      )}
+      {/* Phone shell: tap outside the open drawer to dock it again. Hidden ≥900px, where
+          the nav is a grid column and there is nothing to dismiss. */}
+      {!navCollapsed && (
+        <div className="nav-scrim" onClick={() => setNavCollapsedPersist(true)} aria-hidden="true" />
       )}
       {/* Explicit reveal affordance while collapsed (alongside hover-peek + ⌘B) — on every
           surface EXCEPT the session view, whose topbar carries the [sidebar][+][search] cluster
