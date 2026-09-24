@@ -1772,7 +1772,7 @@ export function App() {
         {overlay && (
           <div className="titlebar-drag" data-tauri-drag-region>
             <span className="titlebar-brand brand-wordmark">
-              <Icon name="logo" size={13} className="mark" /> Kada ya moko<span className="beta-tag">beta</span>
+              <Icon name="logo" size={13} className="mark" /> <span className="wm-kada">Kada</span> <span className="wm-ya">ya</span> Moko<span className="beta-tag">beta</span>
             </span>
           </div>
         )}
@@ -1781,8 +1781,8 @@ export function App() {
             <span /><span /><span />
           </div>
         )}
-        {/* The real Kada ya moko mark (6-point star, same as the app/tray icon) — the old
-            ✦ text glyph was a 4-point sparkle that read as another product's logo. */}
+        {/* The Kada ya Moko hand mark — the brand's raised-palm icon rendered large for the
+            boot splash. The old 6-point star was the OpenWorker mark, retired on rebrand. */}
         <div className="boot-mark">
           <Icon name="logo" size={38} />
         </div>
@@ -2116,7 +2116,7 @@ export function App() {
                 ) : (
                   <div className="hero">
                     <h1 className="greeting">
-                      <span className="mark">✦</span>
+                      <Icon name="logo" size={30} className="mark" />
                       {agent === "chat" ? t("hero.chat_greeting") : t("hero.build_greeting")}
                     </h1>
                     {(

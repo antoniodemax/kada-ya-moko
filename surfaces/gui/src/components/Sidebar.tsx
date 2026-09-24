@@ -1069,7 +1069,7 @@ export function Sidebar(props: Props) {
             <Icon name="sidebar" size={16} />
           </button>
         )}
-        <div className="brand-wordmark text-body">Kada ya moko<span className="beta-tag">beta</span></div>
+        <div className="brand-wordmark text-body"><span className="wm-kada">Kada</span> <span className="wm-ya">ya</span> Moko<span className="beta-tag">beta</span></div>
       </div>
 
       {props.settingsRail ? (

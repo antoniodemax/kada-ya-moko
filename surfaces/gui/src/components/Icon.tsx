@@ -1,6 +1,8 @@
 // A small set of clean, single-weight line icons (SF-Symbols-ish): 24px grid, 1.7 stroke,
 // currentColor, rounded caps/joins. Replaces emoji in the chrome for a crisp, consistent look.
 
+import { useId } from "react";
+
 export type IconName =
   | "sparkle"
   | "logo"
@@ -57,6 +59,9 @@ export function Icon({
   size?: number;
   className?: string;
 }) {
+  // Stable per-instance id for the brand mark's gradient paint (unique across the many
+  // mounted logo instances; sanitized because useId wraps ids in colons).
+  const brandGradId = "km-hand-" + useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const s = {
     width: size,
     height: size,
@@ -91,10 +96,22 @@ export function Icon({
         </svg>
       );
     case "logo":
-      // The OpenWorker mark — a 6-point star, matching the app + macOS tray icon.
+      // Kada ya Moko brand mark — raised hand (the open palm = readiness, agency),
+      // painted with the logo's amber gradient so every instance carries the brand.
       return (
-        <svg {...s} fill="currentColor" stroke="none">
-          <path d="M12.00 1.80 L13.35 9.66 L20.83 6.90 L14.70 12.00 L20.83 17.10 L13.35 14.34 L12.00 22.20 L10.65 14.34 L3.17 17.10 L9.30 12.00 L3.17 6.90 L10.65 9.66 Z" />
+        <svg {...s} viewBox="0 0 24 24" fill={`url(#${brandGradId})`} stroke="none">
+          <defs>
+            <linearGradient id={brandGradId} x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor="#FBBF4B" />
+              <stop offset="0.55" stopColor="#F09A2E" />
+              <stop offset="1" stopColor="#E8862A" />
+            </linearGradient>
+          </defs>
+          <path d="M7.5 11.5 L7.5 5.8 A1.7 1.7 0 0 1 10.9 5.8 L10.9 11.5 Z" />
+          <path d="M10.9 11.5 L10.9 3.5 A1.7 1.7 0 0 1 14.3 3.5 L14.3 11.5 Z" />
+          <path d="M14.3 11.5 L14.3 5.8 A1.7 1.7 0 0 1 17.7 5.8 L17.7 11.5 Z" />
+          <path d="M6 11.5 L6.5 8.5 A1.3 1.3 0 0 1 9 9 L8.5 11.5 Z" />
+          <rect x="6" y="11" width="12" height="10" rx="3" />
         </svg>
       );
     case "sidebar":

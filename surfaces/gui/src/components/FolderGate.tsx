@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getRecentWorkspaces, openWorkspace, type RecentWorkspace } from "../api";
 import { chooseFolder } from "../tauri";
+import { Icon } from "./Icon";
 
 // The mandatory workspace picker for project-scoped personas. Deliberately no
 // "switch persona" escape hatch: if a persona needs a folder, the choice here is
@@ -41,7 +42,7 @@ export function FolderGate({ onChoose, onCancel, create }: Props) {
   return (
     <div className="gate-overlay">
       <div className="gate">
-        <div className="gate-mark">✦</div>
+        <div className="gate-mark"><Icon name="logo" size={22} /></div>
         <h2>{create ? t("sidebar.new_project") : t("folder_gate.choose_folder")}</h2>
         <p className="gate-sub">
           {create

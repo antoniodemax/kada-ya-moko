@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { getConnectors, getSessionConnections } from "../api";
 import type { Attachment } from "../types";
 import { ConnectorIcon } from "../connectors/ConnectorIcon";
+import { Icon } from "./Icon";
 import { indexConnectors, visualFor, type ConnectorMap } from "../connectors/visuals";
 import { useRoots } from "../useRoots";
 import { AddFolderForm } from "./AddFolderForm";
@@ -66,7 +67,7 @@ export function SessionIntro({
   return (
     <div className="intro">
       <h1 className="greeting">
-        <span className="mark">✦</span> {t("intro.greeting")}
+        <Icon name="logo" size={30} className="mark" /> {t("intro.greeting")}
       </h1>
       <p className="intro-lede">{t("intro.lede")}</p>
 

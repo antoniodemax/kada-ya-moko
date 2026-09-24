@@ -53,51 +53,61 @@
 .brand-wordmark {
   font-family: "Manrope", -apple-system, system-ui, sans-serif;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   white-space: nowrap; /* the BETA chip rides the same line, never wraps under */
 }
+/* The lockup's own hierarchy: "Kada"/"Moko" in the quiet wordmark color, "ya" the brand
+   amber, heavier and a hair larger — exactly the logo's emphasis. */
+.brand-wordmark { color: var(--muted); }
+.brand-wordmark .wm-kada { font-weight: 600; }
+.brand-wordmark .wm-ya { color: var(--accent); font-weight: 800; font-size: 1.08em; }
 
 :root {
   color-scheme: light;
-  --paper: #f3f4f6;          /* cool light gray — washes/chips over panel or canvas */
-  --panel: #ffffff;
-  /* UX-039 surface hierarchy: content brightest, chrome tinted. The chat column sits on
-     --canvas; the sidebar + right rail sit on --chrome and recede. Canvas is a whisper
-     off pure white (owner call 2026-08-21: full #fff read as glare) — still clearly
-     brighter than the chrome, and panel-white cards still lift off it. */
-  --canvas: #ffffff;         /* UX-048: the reading column is pure white */
-  --chrome: #fafafa;         /* UX-048: neutral 98% white, v0's shell value (owner 2026-09-03); the hairline on the sidebar carries the split */
-  --chrome-hover: #e9ebee;
-  --placeholder: #a6acb4;    /* UX-048: hint text, lighter than faint on purpose */
+  /* Neutrals are the logo's cool slate mist (its #F5F7FA canvas, the tagline slate, the
+     pale lockup tints). The amber brand lives ONLY in the accent family below, so warmth
+     reads as focal — never as background temperature. */
+  --paper: #F1F4F9;          /* cool mist — washes/chips over panel or canvas */
+  --panel: #FFFFFF;
+  /* Surface hierarchy: content brightest, chrome tinted. */
+  --canvas: #FCFDFF;         /* cool near-white — reading column, brightest surface */
+  --chrome: #F5F7FA;         /* the logo canvas — sidebar + right rail recede behind it */
+  --chrome-hover: #EAEFF5;
+  --placeholder: #94A3B8;    /* the logo tagline slate verbatim; lighter than faint on purpose */
   /* The canvas edge: a soft bloom over the chrome (with the hairline) so the content
      reads as a sheet, not a tile meeting a tile. Owner call 2026-08-21. */
-  --edge-shadow: -14px 0 28px -18px rgba(15, 18, 22, 0.12);
-  --ink: #17191c;
-  --muted: #4d535c;          /* OPE-126 contrast fix (was #5b616b) */
-  --faint: #6f7680;          /* OPE-126 contrast fix — old #9aa1aa was ~2.5:1 on white */
-  --line: #e8eaed;
-  --line-strong: #d8dce1;
-  --accent: #2563eb; /* cobalt — our signature, distinct from the coral-leaning tools */
-  --accent-soft: #e9f0fd;
+  --edge-shadow: -14px 0 28px -18px rgba(16, 22, 34, 0.12);
+  --ink: #18202E;
+  --muted: #4C5666;
+  --faint: #6E7889;
+  --line: #E4E9F0;
+  --line-strong: #D3DAE5;
+  /* One brand hue (≈38°, the logo hand) in three registers: an accessible deep gold for
+     interactive text/fills, the logo's own amber for display moments, and the hand's
+     top-to-bottom gradient for the brand's focal beats. */
+  --accent: #8F6206;         /* deep gold — 5.3:1 on white, safe for 11px links/labels */
+  --accent-bright: #F6B843;  /* the logo "ya" amber — boot mark & other display moments */
+  --brand-grad: linear-gradient(168deg, #FBBF4B 0%, #F09A2E 58%, #E8862A 100%);
+  --accent-soft: #FBF2E0;    /* warm wash — the one place warmth touches the cool chrome */
   --ok: #2f7d57;
   --ok-soft: #eef6f0;
   --ok-line: #cfe6d6;
   --ok-dot: #3f9c5a;          /* brighter green for small status dots */
-  --warn-ink: #92400e;       /* OPE-126 contrast fix (was #b45309, borderline at 11px) */
+  --warn-ink: #92400e;
   --warn-soft: #fef3c7;
   --danger: #b91c1c;
   --danger-soft: #f9e7e5;
   --teal-ink: #0f766e;        /* connector approval badges */
   --teal-line: #cfebea;
   --teal-soft: #edfafa;
-  --solid: #f0f1f4;           /* user bubble — a soft neutral fill (lightened 2026-09-03) */
-  --on-solid: #1f2227;
-  --glass: rgba(255, 255, 255, 0.9);        /* frosted bars over content */
-  --glass-strong: rgba(255, 255, 255, 0.96);
-  --glass-soft: rgba(255, 255, 255, 0.78);
-  --scrim: rgba(29, 27, 24, 0.32);          /* modal / gate overlays */
-  --check-a: #f0f1f3;         /* image-viewer checkerboard */
-  --check-b: #fafbfc;
+  --solid: #ECEFF5;           /* user bubble — the logo's pale lockup tint */
+  --on-solid: #1F2634;
+  --glass: rgba(252, 253, 255, 0.9);        /* frosted bars over content */
+  --glass-strong: rgba(252, 253, 255, 0.96);
+  --glass-soft: rgba(252, 253, 255, 0.78);
+  --scrim: rgba(20, 26, 38, 0.32);          /* modal / gate overlays */
+  --check-a: #EEF1F6;         /* image-viewer checkerboard */
+  --check-b: #F9FBFD;
   /* Headings are sans now (was a Palatino serif) — less editorial, more product. */
   --serif: var(--sans);
   --sans: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -135,21 +145,22 @@
    and kept current by src/theme.ts (Light / Dark / Auto-as-system, stored in localStorage). */
 html[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #131417;
-  --panel: #1c1e22;
-  /* Dark keeps the same hierarchy: canvas lifted a step ABOVE the chrome. */
-  --canvas: #191b1f;
-  --chrome: #16171b;
-  --chrome-hover: #212329;
-  --placeholder: #55595f;
+  --paper: #10141B;
+  --panel: #1B212B;
+  /* Dark keeps the same hierarchy: canvas lifted a step ABOVE the chrome. Cool slate
+     night — the logo's mist at dusk — with the gold accent carrying the warmth. */
+  --canvas: #171C25;
+  --chrome: #141922;
+  --chrome-hover: #232B38;
+  --placeholder: #5C6879;
   --edge-shadow: -14px 0 28px -18px rgba(0, 0, 0, 0.55);
-  --ink: #e6e8eb;
-  --muted: #9aa1ab;
-  --faint: #62686f;
-  --line: #2a2d33;
-  --line-strong: #3a3e46;
-  --accent: #4c8dff;          /* lifted cobalt — keeps contrast on dark panels */
-  --accent-soft: #1c2a44;
+  --ink: #E8ECF2;
+  --muted: #A8B1C0;
+  --faint: #717B8C;
+  --line: #272E3A;
+  --line-strong: #364050;
+  --accent: #E4A62F;          /* bright gold — keeps the brand legible on dark panels */
+  --accent-soft: #2A2110;
   --ok: #58b07f;
   --ok-soft: #1a2b21;
   --ok-line: #2c4736;
@@ -161,14 +172,14 @@ html[data-theme="dark"] {
   --teal-ink: #46c0b2;
   --teal-line: #1f4a45;
   --teal-soft: #11302d;
-  --solid: #2e3138;
-  --on-solid: #e6e8eb;
-  --glass: rgba(28, 30, 34, 0.9);
-  --glass-strong: rgba(28, 30, 34, 0.96);
-  --glass-soft: rgba(28, 30, 34, 0.78);
+  --solid: #2A3140;
+  --on-solid: #E9EDF3;
+  --glass: rgba(23, 28, 37, 0.9);
+  --glass-strong: rgba(23, 28, 37, 0.96);
+  --glass-soft: rgba(23, 28, 37, 0.78);
   --scrim: rgba(0, 0, 0, 0.5);
-  --check-a: #25272c;
-  --check-b: #1c1e22;
+  --check-a: #262C36;
+  --check-b: #1D232C;
 }
 
 * { box-sizing: border-box; }
@@ -361,7 +372,9 @@ body {
 /* idle hero */
 .hero { max-width: 720px; margin: 6vh auto 0; }
 .greeting { font-family: var(--serif); font-size: 40px; line-height: 1.1; margin: 0 0 18px; }
-.greeting .mark { color: var(--accent); margin-right: 10px; }
+/* The hand mark greets in place of the old ✦ glyph; inline-block + baseline nudge sit the
+   svg on the text line. `color` is only a fallback — the mark paints its own gradient. */
+.greeting .mark { color: var(--accent); margin-right: 10px; display: inline-block; vertical-align: -0.14em; }
 .suggestions { margin-top: 40px; display: flex; flex-direction: column; }
 .suggest-head { font-size: var(--fs-ui); color: var(--muted); margin-bottom: 6px; }
 .suggest {
@@ -668,8 +681,15 @@ button.btn.danger { color: var(--accent); }
 .dd-label { font-size: var(--fs-ui); color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
 .dd-item .chk { color: var(--accent); }
 .dd-desc { font-size: var(--fs-meta); color: var(--faint); margin-top: 1px; }
-.send { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--accent); color: #fff; cursor: pointer; font-size: 16px; }
-.send:disabled { opacity: 0.4; cursor: default; }
+.send {
+  width: 34px; height: 34px; border-radius: 50%; border: none;
+  background: var(--brand-grad); color: #fff; cursor: pointer; font-size: 16px;
+  /* The hand's amber, condensed into the composer's one loud element. */
+  box-shadow: 0 2px 10px -2px rgba(232, 134, 42, 0.55);
+  transition: filter .12s ease, box-shadow .12s ease;
+}
+.send:hover:not(:disabled) { filter: brightness(1.06); box-shadow: 0 3px 12px -2px rgba(232, 134, 42, 0.65); }
+.send:disabled { opacity: 0.4; cursor: default; box-shadow: none; }
 .statusline { max-width: 760px; margin: 6px auto 0; font-size: var(--fs-meta); color: var(--faint); display: flex; gap: 12px; }
 .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .dot.idle { background: var(--faint); }
@@ -1178,11 +1198,13 @@ button.btn.sm.danger-btn:hover { border-color: var(--danger); }
   gap: 14px;
   height: 100vh;
   color: var(--ink);
-  background: var(--paper);
+  /* A warm amber bloom behind the hand — the logo's warmth entering the cool canvas. */
+  background: radial-gradient(560px 300px at 50% 44%, rgba(246, 184, 67, 0.16), transparent 72%),
+    var(--paper);
 }
 .boot-mark {
   font-size: 38px;
-  color: var(--accent);
+  color: var(--accent-bright);
   opacity: 0.9;
   animation: boot-pulse 1.4s ease-in-out infinite;
 }

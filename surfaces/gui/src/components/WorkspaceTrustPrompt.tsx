@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { setWorkspaceTrusted, type WorkspaceCommandTrust } from "../api";
+import { Icon } from "./Icon";
 
 export function WorkspaceTrustPrompt({
   request,
@@ -28,7 +29,7 @@ export function WorkspaceTrustPrompt({
   return (
     <div className="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="workspace-trust-title">
       <div className="gate max-w-[560px]">
-        <div className="gate-mark">✦</div>
+        <div className="gate-mark"><Icon name="logo" size={22} /></div>
         <h2 id="workspace-trust-title">{t("workspace_trust.title")}</h2>
         <p className="gate-sub">
           {t("workspace_trust.sub")}

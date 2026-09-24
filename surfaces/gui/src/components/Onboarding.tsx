@@ -12,6 +12,7 @@ import {
 import { ConnectorBadge } from "../connectors/ConnectorIcon";
 import { ProviderCards, ProviderForm, useProviderSetup } from "../providers/ProviderSetup";
 import { Spinner } from "./AutomationQuickstart";
+import { Icon } from "./Icon";
 
 // First-run onboarding (UX-DECISIONS §24 → §29 → §39): model → your tools → go.
 // §39 (owner design, 2026-07-18): step 1 is a PROVIDER GALLERY — 13 real brand
@@ -350,7 +351,7 @@ export function Onboarding({ onDone }: { onDone: (next?: "work" | "gallery" | "a
               data-testid="ob-start"
             >
               <span className="w-9 h-9 rounded-lg bg-accentSoft text-accent grid place-items-center text-body shrink-0">
-                ✦
+                <Icon name="logo" size={18} />
               </span>
               <span className="flex-1 min-w-0 text-left">
                 <b className="block text-ui">{t("onboarding.cta_work_title")}</b>
