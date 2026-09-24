@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="km" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBBF4B"/>
+      <stop offset=".55" stop-color="#F09A2E"/>
+      <stop offset="1" stop-color="#E8862A"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#km)">
+    <path d="M7.5 11.5 L7.5 5.8 A1.7 1.7 0 0 1 10.9 5.8 L10.9 11.5 Z"/>
+    <path d="M10.9 11.5 L10.9 3.5 A1.7 1.7 0 0 1 14.3 3.5 L14.3 11.5 Z"/>
+    <path d="M14.3 11.5 L14.3 5.8 A1.7 1.7 0 0 1 17.7 5.8 L17.7 11.5 Z"/>
+    <path d="M6 11.5 L6.5 8.5 A1.3 1.3 0 0 1 9 9 L8.5 11.5 Z"/>
+    <rect x="6" y="11" width="12" height="10" rx="3"/>
+  </g>
+</svg>
